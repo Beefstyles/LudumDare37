@@ -3,17 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[System.Serializable]
+public class TextUpdate
+{
+    public TextMesh Verb_Entry_1, Verb_Entry_2, Noun_Entry_1, Noun_Entry_2;
+    public TextMesh StatusCode;
+}
 public class DSKY_Control_Computer : MonoBehaviour {
 
     //One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Verb, Noun, Clear, Execute
-    public bool VerbSelected { get; set; }
-    public bool NounSelected { get; set; }
+    private bool verbSelected;
+    private bool nounSelected;
     private int numberEntered;
+    public TextUpdate UpdatedText;
+    private bool firstVerbToBeEntered = true, firstNounToBeEntered = true;
+    private int firstVerbNumber = 0, secondVerbNumber = 0;
+    private int firstNounNumber = 0, secondNounNumber = 0;
+
     // Use this for initialization
     void Start ()
     {
-		
-	}
+        UpdatedText.Verb_Entry_1.text = firstVerbNumber.ToString();
+        UpdatedText.Verb_Entry_2.text = numberEntered.ToString();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -82,8 +94,18 @@ public class DSKY_Control_Computer : MonoBehaviour {
         switch (pa)
         {
             case (PossibleActions.Verb):
+                if (!verbSelected)
+                {
+                    verbSelected = true;
+                    nounSelected = false;
+                }
                 break;
             case (PossibleActions.Noun):
+                if (!nounSelected)
+                {
+                    nounSelected = true;
+                    verbSelected = false;
+                }
                 break;
             case (PossibleActions.Clear):
                 break;
@@ -95,8 +117,60 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void NumberHandler(int numberEntered)
     {
+        if (verbSelected)
+        {
+            if (firstVerbToBeEntered)
+            {       
+                firstVerbNumber = numberEntered;
+                updateVerb1Text(firstVerbNumber);
+                firstVerbToBeEntered = false;
+            }
+            else
+            {
+                secondVerbNumber = numberEntered;
+                updateVerb2Text(secondVerbNumber);
+                firstVerbToBeEntered = true;
+            }
+        }
 
+        if (nounSelected)
+        {
+            if (firstNounToBeEntered)
+            {
+                firstNounNumber = numberEntered;
+                updateNoun1Text(firstNounNumber);
+                firstNounToBeEntered = false;
+            }
+            else
+            {
+                secondNounNumber = numberEntered;
+                updateNoun2Text(secondVerbNumber);
+                firstNounToBeEntered = true;
+            }
+        }
     }
+
+    private void updateVerb1Text(int number)
+    {
+        UpdatedText.Verb_Entry_1.text = number.ToString();
+    }
+
+    private void updateVerb2Text(int number)
+    {
+        UpdatedText.Verb_Entry_2.text = number.ToString();
+    }
+
+    private void updateNoun1Text(int number)
+    {
+        UpdatedText.Noun_Entry_1.text = number.ToString();
+    }
+
+    private void updateNoun2Text(int number)
+    {
+        UpdatedText.Noun_Entry_2.text = number.ToString();
+    }
+
+
 }
 
 
