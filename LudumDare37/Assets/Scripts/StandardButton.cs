@@ -9,11 +9,14 @@ public class StandardButton : MonoBehaviour {
     private bool buttonOn;
     private MeshRenderer gameObjMesh;
     ButtonCharacteristics bc;
+    DSKY_Control_Computer dskyControl;
 
 	// Use this for initialization
 	void Start ()
     {
         bc = GetComponent<ButtonCharacteristics>();
+        
+        dskyControl = FindObjectOfType<DSKY_Control_Computer>();
         gameObjMesh = GetComponent<MeshRenderer>();
         gameObjMesh.material = ButtonOffMat;
         buttonOn = false;
@@ -25,7 +28,8 @@ public class StandardButton : MonoBehaviour {
     {
         if (ButtonPressed)
         {
-            if(bc.ButtonType == ButtonType.Toggle)
+            ActuateButton();
+            if (bc.ButtonType == ButtonType.Toggle)
             {
                 ButtonPressed = false;
                 if (buttonOn)
@@ -54,5 +58,10 @@ public class StandardButton : MonoBehaviour {
         gameObjMesh.material = ButtonOnMat;
         yield return new WaitForSeconds(0.1F);
         gameObjMesh.material = ButtonOffMat;
+    }
+
+    private void ActuateButton()
+    {
+        dskyControl.ReceiveButtonPress(bc.PossibleActions);
     }
 }
