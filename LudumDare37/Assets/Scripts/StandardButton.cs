@@ -8,10 +8,12 @@ public class StandardButton : MonoBehaviour {
     public Material ButtonOnMat, ButtonOffMat;
     private bool buttonOn;
     private MeshRenderer gameObjMesh;
+    ButtonCharacteristics bc;
 
 	// Use this for initialization
 	void Start ()
     {
+        bc = GetComponent<ButtonCharacteristics>();
         gameObjMesh = GetComponent<MeshRenderer>();
         gameObjMesh.material = ButtonOffMat;
         buttonOn = false;
@@ -23,18 +25,34 @@ public class StandardButton : MonoBehaviour {
     {
         if (ButtonPressed)
         {
-            ButtonPressed = false;
-            if (buttonOn)
+            if(bc.ButtonType == ButtonType.Toggle)
             {
-                gameObjMesh.material = ButtonOffMat;
-                buttonOn = false;
+                ButtonPressed = false;
+                if (buttonOn)
+                {
+                    gameObjMesh.material = ButtonOffMat;
+                    buttonOn = false;
+                }
+
+                else
+                {
+                    gameObjMesh.material = ButtonOnMat;
+                    buttonOn = true;
+                }
             }
 
-            else
+            if(bc.ButtonType == ButtonType.OnePress)
             {
-                gameObjMesh.material = ButtonOnMat;
-                buttonOn = true;
+                ButtonPressed = false;
+                StartCoroutine("FlashButtonChange");
             }
         }
 	}
+
+    IEnumerator FlashButtonChange()
+    {
+        gameObjMesh.material = ButtonOnMat;
+        yield return new WaitForSeconds(0.1F);
+        gameObjMesh.material = ButtonOffMat;
+    }
 }
