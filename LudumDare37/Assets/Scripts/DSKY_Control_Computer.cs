@@ -25,12 +25,16 @@ public class DSKY_Control_Computer : MonoBehaviour {
         switch (pa)
         {
             case PossibleActions.Verb:
+                ActionHandler(pa);
                 break;
             case PossibleActions.Noun:
+                ActionHandler(pa);
                 break;
             case PossibleActions.Clear:
+                ActionHandler(pa);
                 break;
             case PossibleActions.Execute:
+                ActionHandler(pa);
                 break;
             default:
                 ParseNumberInput(pa);
@@ -40,37 +44,57 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void ParseNumberInput(PossibleActions pa)
     {
-        switch (pa.ToString())
+        switch (pa)
         {
-            case ("One"):
+            case (PossibleActions.One):
                 numberEntered = 1;
                 break;
-            case ("Two"):
+            case (PossibleActions.Two):
                 numberEntered = 2;
                 break;
-            case ("Three"):
+            case (PossibleActions.Three):
                 numberEntered = 3;
                 break;
-            case ("Four"):
+            case (PossibleActions.Four):
                 numberEntered = 4;
                 break;
-            case ("Five"):
+            case (PossibleActions.Five):
                 numberEntered = 5;
                 break;
-            case ("Six"):
+            case (PossibleActions.Six):
                 numberEntered = 6;
                 break;
-            case ("Seven"):
+            case (PossibleActions.Seven):
                 numberEntered = 7;
                 break;
-            case ("Eight"):
+            case (PossibleActions.Eight):
                 numberEntered = 8;
                 break;
-            case ("Nine"):
+            case (PossibleActions.Nine):
                 numberEntered = 9;
                 break;
         }
-       
+        NumberHandler(numberEntered);
+    }
+
+    private void ActionHandler(PossibleActions pa)
+    {
+        switch (pa)
+        {
+            case (PossibleActions.Verb):
+                break;
+            case (PossibleActions.Noun):
+                break;
+            case (PossibleActions.Clear):
+                break;
+            case (PossibleActions.Execute):
+                break;
+
+        }
+    }
+
+    private void NumberHandler(int numberEntered)
+    {
 
     }
 }
