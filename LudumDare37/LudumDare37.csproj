@@ -81,6 +81,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\ButtonCharacteristics.cs" />
+    <Compile Include="Assets\Scripts\DSKY_Control_Computer.cs" />
     <Compile Include="Assets\Scripts\FPSPlayerButtonPress.cs" />
     <Compile Include="Assets\Scripts\StandardButton.cs" />
   </ItemGroup>
