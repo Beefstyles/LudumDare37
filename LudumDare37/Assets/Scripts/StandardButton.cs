@@ -26,8 +26,16 @@ public class StandardButton : MonoBehaviour {
 
 	void Update ()
     {
+        
         if (ButtonPressed)
         {
+            if (bc.PossibleActions == PossibleActions.Verb)
+            {
+                if (dskyControl.VerbSelected)
+                {
+                    return;
+                }
+            }
             ActuateButton();
             if (bc.ButtonType == ButtonType.Toggle)
             {

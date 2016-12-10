@@ -12,8 +12,8 @@ public class TextUpdate
 public class DSKY_Control_Computer : MonoBehaviour {
 
     //One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Verb, Noun, Clear, Execute
-    private bool verbSelected;
-    private bool nounSelected;
+    public bool VerbSelected { get; set; }
+    public bool NounSelected { get; set; }
     private int numberEntered;
     public TextUpdate UpdatedText;
     private bool firstVerbToBeEntered = true, firstNounToBeEntered = true;
@@ -94,17 +94,17 @@ public class DSKY_Control_Computer : MonoBehaviour {
         switch (pa)
         {
             case (PossibleActions.Verb):
-                if (!verbSelected)
+                if (!VerbSelected)
                 {
-                    verbSelected = true;
-                    nounSelected = false;
+                    VerbSelected = true;
+                    NounSelected = false;
                 }
                 break;
             case (PossibleActions.Noun):
-                if (!nounSelected)
+                if (!NounSelected)
                 {
-                    nounSelected = true;
-                    verbSelected = false;
+                    NounSelected = true;
+                    VerbSelected = false;
                 }
                 break;
             case (PossibleActions.Clear):
@@ -117,7 +117,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void NumberHandler(int numberEntered)
     {
-        if (verbSelected)
+        if (VerbSelected)
         {
             if (firstVerbToBeEntered)
             {       
@@ -133,7 +133,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
             }
         }
 
-        if (nounSelected)
+        if (NounSelected)
         {
             if (firstNounToBeEntered)
             {
