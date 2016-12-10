@@ -1,7 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LudumDare37.Plugins", "LudumDare37.Plugins.csproj", "{D82AAAB9-C451-61D1-B659-55E9A523EFC6}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LudumDare37", "LudumDare37.csproj", "{1EAE6D6F-B3FE-EE4D-A394-B558DB834BFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LudumDare37.Editor.Plugins", "LudumDare37.Editor.Plugins.csproj", "{43AEEDEC-E9C2-22B9-BEBB-5D49DE0F2437}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,10 +13,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D82AAAB9-C451-61D1-B659-55E9A523EFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D82AAAB9-C451-61D1-B659-55E9A523EFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D82AAAB9-C451-61D1-B659-55E9A523EFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D82AAAB9-C451-61D1-B659-55E9A523EFC6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1EAE6D6F-B3FE-EE4D-A394-B558DB834BFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1EAE6D6F-B3FE-EE4D-A394-B558DB834BFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EAE6D6F-B3FE-EE4D-A394-B558DB834BFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EAE6D6F-B3FE-EE4D-A394-B558DB834BFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43AEEDEC-E9C2-22B9-BEBB-5D49DE0F2437}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43AEEDEC-E9C2-22B9-BEBB-5D49DE0F2437}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43AEEDEC-E9C2-22B9-BEBB-5D49DE0F2437}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43AEEDEC-E9C2-22B9-BEBB-5D49DE0F2437}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
