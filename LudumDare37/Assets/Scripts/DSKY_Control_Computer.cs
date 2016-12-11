@@ -197,8 +197,23 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
         switch (combinedVerb)
         {
-
+            case ("00"): //Engines
+                switch (combinedNoun)
+                {
+                    case ("32"): // Off
+                        ControlEngines(true);
+                        break;
+                    case ("54"): // Off
+                        ControlEngines(false);
+                        break;
+                }
+                break;
         }
+    }
+
+    private void ControlEngines(bool enginesOff)
+    {
+
     }
 }
 
