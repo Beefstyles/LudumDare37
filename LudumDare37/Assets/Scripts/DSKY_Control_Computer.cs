@@ -201,17 +201,133 @@ public class DSKY_Control_Computer : MonoBehaviour {
                 switch (combinedNoun)
                 {
                     case ("32"): // Off
+                        ControlEngines(false);
+                        break;
+                    case ("54"): // On
                         ControlEngines(true);
                         break;
+                }
+                break;
+            case ("11"): //Lights
+                switch (combinedNoun)
+                {
+                    case ("00"): // Off
+                        ControlLights("Off");
+                        break;
+                    case ("44"): // Green
+                        ControlLights("Green");
+                        break;
+                    case ("67"): // Red
+                        ControlLights("Red");
+                        break;
+                }
+                break;
+            case ("22"): //Radio
+                switch (combinedNoun)
+                {
+                    case ("15"): // Off
+                        ControlRadio(false);
+                        break;
+                    case ("25"): // On
+                        ControlRadio(true);
+                        break;
+                }
+                break;
+            case ("33"): //Beacon
+                switch (combinedNoun)
+                {
+                    case ("22"): // Deploy
+                        ControlBeacon("Deploy");
+                        break;
+                    case ("47"): // On
+                        ControlBeacon("On");
+                        break;
+                    case ("68"): // Off
+                        ControlBeacon("Off");
+                        break;
+                }
+                break;
+            case ("44"): //Gravity
+                switch (combinedNoun)
+                {
+                    case ("44"): // On
+                        ControlGravity(true);
+                        break;
                     case ("54"): // Off
-                        ControlEngines(false);
+                        ControlGravity(false);
+                        break;
+                }
+                break;
+            case ("55"): //Orientation
+                switch (combinedNoun)
+                {
+                    case ("12"): // Flip
+                        FlipShip();
+                        break;
+                }
+                break;
+            case ("66"): //Sensors
+                switch (combinedNoun)
+                {
+                    case ("12"): // Active Scanning On
+                        ControlSensors(true);
+                        break;
+                    case ("22"): // Active Scanning Off
+                        ControlSensors(false);
+                        break;
+                }
+                break;
+            case ("77"): //Life support
+                switch (combinedNoun)
+                {
+                    case ("14"): // O2 On
+                        ControlSensors(true);
+                        break;
+                    case ("24"): // O2 Off
+                        ControlSensors(false);
+                        break;
+                    case ("56"): // CO2 Scrubber On
+                        ControlSensors(true);
+                        break;
+                    case ("66"): // CO2 Scrubber On
+                        ControlSensors(false);
                         break;
                 }
                 break;
         }
     }
 
-    private void ControlEngines(bool enginesOff)
+    private void ControlEngines(bool engineOn)
+    {
+
+    }
+
+    private void ControlLights(string action)
+    {
+
+    }
+
+    private void ControlRadio(bool radioOn)
+    {
+
+    }
+
+    private void ControlBeacon(string action)
+    {
+
+    }
+
+    private void ControlGravity(bool gravityOn)
+    {
+
+    }
+
+    private void FlipShip()
+    {
+
+    }
+
+    private void ControlSensors(bool sensorsOn)
     {
 
     }
