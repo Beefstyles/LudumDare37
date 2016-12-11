@@ -8,6 +8,7 @@ public class FPSPlayerButtonPress : MonoBehaviour {
     private RaycastHit hit;
     private Camera fpsCamera;
     StandardButton sb;
+    BookDisplay bd;
     public Image Crosshair;
     public Sprite ActiveCrosshair, NormalCrosshair;
     private bool ActiveCrosshairIsSet = false;
@@ -37,14 +38,15 @@ public class FPSPlayerButtonPress : MonoBehaviour {
                 if (Input.GetButtonDown("Fire1"))
                 {
                     sb = hit.transform.gameObject.GetComponent<StandardButton>();
-                    if(sb != null)
+                    bd = hit.transform.gameObject.GetComponent<BookDisplay>();
+                    if (sb != null)
                     {
                         sb.ButtonPressed = true;
                     }
 
-                    else
+                    else if (bd != null)
                     {
-                        
+                        bd.DisplayBookText();
                     }
                     
                 }

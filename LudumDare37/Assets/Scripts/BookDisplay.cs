@@ -10,8 +10,14 @@ public class BookDisplay : MonoBehaviour {
     };
 
     public BookType bookType;
+    BookController bc;
+
+    void Start()
+    {
+        bc = FindObjectOfType<BookController>();
+    }
 	public void DisplayBookText()
     {
-
+        bc.DisplayBook(bookType);
     }
 }
