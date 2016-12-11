@@ -25,8 +25,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
     {
         VerbSelected = false;
         NounSelected = false;
-        UpdatedText.Verb_Entry_1.text = firstVerbNumber.ToString();
-        UpdatedText.Verb_Entry_2.text = numberEntered.ToString();
+        UpdateAllVerbNounTexts();
     }
 	
 	// Update is called once per frame
@@ -110,6 +109,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
                 }
                 break;
             case (PossibleActions.Clear):
+                ClearText();
                 break;
             case (PossibleActions.Execute):
                 break;
@@ -150,6 +150,23 @@ public class DSKY_Control_Computer : MonoBehaviour {
                 firstNounToBeEntered = true;
             }
         }
+    }
+
+    private void ClearText()
+    {
+        firstVerbNumber = 0;
+        secondVerbNumber = 0;
+        firstNounNumber = 0;
+        secondNounNumber = 0;
+        UpdateAllVerbNounTexts();
+    }
+
+    private void UpdateAllVerbNounTexts()
+    {
+        updateVerb1Text(firstVerbNumber);
+        updateVerb2Text(secondVerbNumber);
+        updateNoun1Text(firstNounNumber);
+        updateNoun2Text(secondNounNumber);
     }
 
     private void updateVerb1Text(int number)

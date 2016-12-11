@@ -11,6 +11,7 @@ public class FPSPlayerButtonPress : MonoBehaviour {
     public Image Crosshair;
     public Sprite ActiveCrosshair, NormalCrosshair;
     private bool ActiveCrosshairIsSet = false;
+    
 
     void Start()
     {
@@ -36,7 +37,16 @@ public class FPSPlayerButtonPress : MonoBehaviour {
                 if (Input.GetButtonDown("Fire1"))
                 {
                     sb = hit.transform.gameObject.GetComponent<StandardButton>();
-                    sb.ButtonPressed = true;
+                    if(sb != null)
+                    {
+                        sb.ButtonPressed = true;
+                    }
+
+                    else
+                    {
+                        
+                    }
+                    
                 }
             }
         }
