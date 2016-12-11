@@ -20,11 +20,13 @@ public class DSKY_Control_Computer : MonoBehaviour {
     private bool firstVerbToBeEntered = true, firstNounToBeEntered = true;
     private int firstVerbNumber = 0, secondVerbNumber = 0;
     private int firstNounNumber = 0, secondNounNumber = 0;
-    private bool isRadioOn = false;
+    GameRadioControl GRC;
+    public Rigidbody PlayerRB;
 
     // Use this for initialization
     void Start ()
     {
+        GRC = FindObjectOfType<GameRadioControl>();
         VerbSelected = false;
         NounSelected = false;
         UpdateAllVerbNounTexts();
@@ -268,6 +270,9 @@ public class DSKY_Control_Computer : MonoBehaviour {
                     case ("68"): // Off
                         ControlBeacon("Off");
                         break;
+                    case ("97"): // Set Code
+                        ControlBeacon("Set Code");
+                        break;
                     default:
                         //Invalid verb
                         ErrorCodeHandler("E1976");
@@ -412,10 +417,11 @@ public class DSKY_Control_Computer : MonoBehaviour {
     {
         if (radioOn)
         {
-            if (!isRadioOn)
-            {
-                isRadioOn = true;
-            }
+            GRC.RadioOn();
+        }
+        else
+        {
+            GRC.RadioOff();
         }
     }
 
@@ -426,7 +432,14 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void ControlGravity(bool gravityOn)
     {
-
+        if (gravityOn)
+        {
+            PlayerRB.useGravity = true;
+        }
+        else
+        {
+            PlayerRB.useGravity = false;
+        }
     }
 
     private void FlipShip()
