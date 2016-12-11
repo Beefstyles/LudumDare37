@@ -26,6 +26,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
         VerbSelected = false;
         NounSelected = false;
         UpdateAllVerbNounTexts();
+        ErrorCodeHandler("E7702");
     }
 	
 	// Update is called once per frame
@@ -206,6 +207,10 @@ public class DSKY_Control_Computer : MonoBehaviour {
                     case ("54"): // On
                         ControlEngines(true);
                         break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
+                        break;
                 }
                 break;
             case ("11"): //Lights
@@ -220,6 +225,10 @@ public class DSKY_Control_Computer : MonoBehaviour {
                     case ("67"): // Red
                         ControlLights("Red");
                         break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
+                        break;
                 }
                 break;
             case ("22"): //Radio
@@ -230,6 +239,10 @@ public class DSKY_Control_Computer : MonoBehaviour {
                         break;
                     case ("25"): // On
                         ControlRadio(true);
+                        break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
                         break;
                 }
                 break;
@@ -245,6 +258,10 @@ public class DSKY_Control_Computer : MonoBehaviour {
                     case ("68"): // Off
                         ControlBeacon("Off");
                         break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
+                        break;
                 }
                 break;
             case ("44"): //Gravity
@@ -255,6 +272,10 @@ public class DSKY_Control_Computer : MonoBehaviour {
                         break;
                     case ("54"): // Off
                         ControlGravity(false);
+                        break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
                         break;
                 }
                 break;
@@ -275,24 +296,67 @@ public class DSKY_Control_Computer : MonoBehaviour {
                     case ("22"): // Active Scanning Off
                         ControlSensors(false);
                         break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
+                        break;
                 }
                 break;
             case ("77"): //Life support
                 switch (combinedNoun)
                 {
                     case ("14"): // O2 On
-                        ControlSensors(true);
+                        LifeSupportControl("O2 On");
                         break;
                     case ("24"): // O2 Off
-                        ControlSensors(false);
+                        LifeSupportControl("O2 Off");
                         break;
                     case ("56"): // CO2 Scrubber On
-                        ControlSensors(true);
+                        LifeSupportControl("CO2 Scrub On");
                         break;
-                    case ("66"): // CO2 Scrubber On
-                        ControlSensors(false);
+                    case ("66"): // CO2 Scrubber off
+                        LifeSupportControl("CO2 Scrub Off");
+                        break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
                         break;
                 }
+                break;
+            case ("88"): //Personnel supports
+                switch (combinedNoun)
+                {
+                    case ("77"): // Restraints On
+                        RestraintsControl(true);
+                        break;
+                    case ("88"): // Restraints Off
+                        RestraintsControl(false);
+                        break;
+                    case ("99"): // Deep Freeze On
+                        DeepFreezeOn();
+                        break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
+                        break;
+                }
+                break;
+            case ("99"):
+                switch (combinedNoun)
+                {
+                    case ("44"):
+                        break;
+                    case ("56"):
+                        break;
+                    default:
+                        //Invalid verb
+                        ErrorCodeHandler("E1976");
+                        break;
+                }
+            break;
+            default:
+                //Invalid verb
+                ErrorCodeHandler("E1908");
                 break;
         }
     }
@@ -330,6 +394,26 @@ public class DSKY_Control_Computer : MonoBehaviour {
     private void ControlSensors(bool sensorsOn)
     {
 
+    }
+
+    private void LifeSupportControl(string action)
+    {
+
+    }
+
+    private void RestraintsControl(bool restraintsOn)
+    {
+
+    }
+
+    private void DeepFreezeOn()
+    {
+
+    }
+
+    private void ErrorCodeHandler(string errorCode)
+    {
+        UpdatedText.StatusCode.text = errorCode;
     }
 }
 
