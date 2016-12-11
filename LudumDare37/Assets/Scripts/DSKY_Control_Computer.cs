@@ -190,6 +190,16 @@ public class DSKY_Control_Computer : MonoBehaviour {
     }
 
 
+    private void ExecuteActions(int firstVerb, int secondVerb, int firstNoun, int secondNoun)
+    {
+        string combinedVerb = firstVerb.ToString() + secondVerb.ToString();
+        string combinedNoun = firstVerb.ToString() + secondVerb.ToString();
+
+        switch (combinedVerb)
+        {
+
+        }
+    }
 }
 
 
