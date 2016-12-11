@@ -87,6 +87,8 @@
     <Compile Include="Assets\Scripts\DSKY_Control_Computer.cs" />
     <Compile Include="Assets\Scripts\FPSPlayerButtonPress.cs" />
     <Compile Include="Assets\Scripts\GameRadioControl.cs" />
+    <Compile Include="Assets\Scripts\MasterControllerScript.cs" />
+    <Compile Include="Assets\Scripts\RestartButton.cs" />
     <Compile Include="Assets\Scripts\StandardButton.cs" />
   </ItemGroup>
   <ItemGroup>
