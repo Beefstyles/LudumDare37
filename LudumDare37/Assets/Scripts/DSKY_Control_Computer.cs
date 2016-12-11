@@ -14,6 +14,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
     //One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Verb, Noun, Clear, Execute
     public bool VerbSelected { get; set; }
     public bool NounSelected { get; set; }
+    public Light Light1, Light2, Light3, Light4;
     private int numberEntered;
     public TextUpdate UpdatedText;
     private bool firstVerbToBeEntered = true, firstNounToBeEntered = true;
@@ -60,6 +61,9 @@ public class DSKY_Control_Computer : MonoBehaviour {
     {
         switch (pa)
         {
+            case (PossibleActions.Zero):
+                numberEntered = 0;
+                break;
             case (PossibleActions.One):
                 numberEntered = 1;
                 break;
@@ -113,6 +117,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
                 ClearText();
                 break;
             case (PossibleActions.Execute):
+                ExecuteActions(firstVerbNumber, secondVerbNumber, firstNounNumber, secondNounNumber);
                 break;
 
         }
@@ -147,7 +152,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
             else
             {
                 secondNounNumber = numberEntered;
-                updateNoun2Text(secondVerbNumber);
+                updateNoun2Text(secondNounNumber);
                 firstNounToBeEntered = true;
             }
         }
@@ -194,8 +199,9 @@ public class DSKY_Control_Computer : MonoBehaviour {
     private void ExecuteActions(int firstVerb, int secondVerb, int firstNoun, int secondNoun)
     {
         string combinedVerb = firstVerb.ToString() + secondVerb.ToString();
-        string combinedNoun = firstVerb.ToString() + secondVerb.ToString();
+        string combinedNoun = firstNoun.ToString() + secondNoun.ToString();
 
+        Debug.Log("combined verb is " + combinedVerb + " combined noun is " + combinedNoun);
         switch (combinedVerb)
         {
             case ("00"): //Engines
@@ -214,12 +220,15 @@ public class DSKY_Control_Computer : MonoBehaviour {
                 }
                 break;
             case ("11"): //Lights
+                Debug.Log("Lights!");
                 switch (combinedNoun)
                 {
                     case ("00"): // Off
+                        Debug.Log("Off!");
                         ControlLights("Off");
                         break;
                     case ("44"): // Green
+                        Debug.Log("Green!");
                         ControlLights("Green");
                         break;
                     case ("67"): // Red
@@ -368,12 +377,41 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void ControlLights(string action)
     {
+        //public Light Light1, Light2, Light3, Light4;
+        switch (action)
+        {
+            case ("Off"):
+                Light1.color = Color.black;
+                Light2.color = Color.black;
+                Light3.color = Color.black;
+                Light4.color = Color.black;
+                ErrorCodeHandler("S1156");
+                break;
+            case ("Green"):
+                Light1.color = Color.green;
+                Light2.color = Color.green;
+                Light3.color = Color.green;
+                Light4.color = Color.green;
+                ErrorCodeHandler("S1196");
+                break;
+            case ("Red"):
+                Light1.color = Color.red;
+                Light2.color = Color.red;
+                Light3.color = Color.red;
+                Light4.color = Color.red;
+                ErrorCodeHandler("S1183");
+                break;
+            //Off, Green, Red
 
+        }
     }
 
     private void ControlRadio(bool radioOn)
     {
+        if (radioOn)
+        {
 
+        }
     }
 
     private void ControlBeacon(string action)

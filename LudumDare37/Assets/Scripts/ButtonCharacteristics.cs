@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PossibleActions
 {
-    One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Verb, Noun, Clear, Execute
+    Zero, One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Verb, Noun, Clear, Execute
 };
 
 public enum ButtonType
