@@ -378,9 +378,10 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void ControlLights(string action)
     {
-        //public Light Light1, Light2, Light3, Light4;
+        //Light Light1, Light2, Light3, Light4;
         switch (action)
         {
+            //Off, Green, Red
             case ("Off"):
                 Light1.color = Color.black;
                 Light2.color = Color.black;
@@ -402,7 +403,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
                 Light4.color = Color.red;
                 ErrorCodeHandler("S1183");
                 break;
-            //Off, Green, Red
+            
 
         }
     }
@@ -414,7 +415,6 @@ public class DSKY_Control_Computer : MonoBehaviour {
             if (!isRadioOn)
             {
                 isRadioOn = true;
-                
             }
         }
     }
