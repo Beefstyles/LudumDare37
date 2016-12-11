@@ -23,6 +23,8 @@ public class DSKY_Control_Computer : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        VerbSelected = false;
+        NounSelected = false;
         UpdatedText.Verb_Entry_1.text = firstVerbNumber.ToString();
         UpdatedText.Verb_Entry_2.text = numberEntered.ToString();
     }
