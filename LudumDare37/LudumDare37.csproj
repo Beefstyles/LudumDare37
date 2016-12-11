@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\StandardButton.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Sounds\SoundLicenses.txt" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
