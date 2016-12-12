@@ -33,6 +33,11 @@ public class MasterControllerScript : MonoBehaviour {
                 rb.RestartGame();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
 	}
 
     public void EndGame(string killName, string victoryText)
