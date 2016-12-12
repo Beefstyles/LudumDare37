@@ -27,14 +27,23 @@ public class DSKY_Control_Computer : MonoBehaviour {
     public Rigidbody PlayerRB;
    
    
+    [SerializeField]
     private bool co2ScrubbersOn = false;
+    [SerializeField]
     private bool o2On = false;
+    [SerializeField]
     private bool sensorBeaconDeployed = false;
+    [SerializeField]
     private bool secretSensorCodeSet = false;
+    [SerializeField]
     private bool sensorBeaconOn = false;
+    [SerializeField]
     private bool restraintsOn = false;
+    [SerializeField]
     private bool gravityOn = true;
+    [SerializeField]
     private bool enginesOn = false;
+    [SerializeField]
     private bool activeScanningOn = false;
 
     // Use this for initialization
@@ -263,11 +272,11 @@ public class DSKY_Control_Computer : MonoBehaviour {
             case ("22"): //Radio
                 switch (combinedNoun)
                 {
-                    case ("15"): // Off
-                        ControlRadio(false);
-                        break;
-                    case ("25"): // On
+                    case ("15"): // On
                         ControlRadio(true);
+                        break;
+                    case ("25"): // Off
+                        ControlRadio(false);
                         break;
                     default:
                         //Invalid verb
@@ -400,12 +409,12 @@ public class DSKY_Control_Computer : MonoBehaviour {
         switch (engineOn)
         {
             case (true):
-                engineOn = true;
+                enginesOn = true;
                 engineSoundControl.EngineOn();
                 ErrorCodeHandler("S0067");
                 break;
             case (false):
-                engineOn = false;
+                enginesOn = false;
                 engineSoundControl.EngineOff();
                 ErrorCodeHandler("S0078");
                 break;
@@ -485,7 +494,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
                 else
                 {
                     //Failure to set beacon
-                    ErrorCodeHandler("S3359");
+                    ErrorCodeHandler("E3359");
                 }
                 break;
             case ("On"):
@@ -503,21 +512,25 @@ public class DSKY_Control_Computer : MonoBehaviour {
         }
     }
 
-    private void ControlGravity(bool gravityOn)
+    private void ControlGravity(bool gravityOnControl)
     {
-        if (gravityOn)
+        if (gravityOnControl)
         {
             PlayerRB.useGravity = true;
+            gravityOn = true;
+            ErrorCodeHandler("S4487");
         }
         else
         {
             PlayerRB.useGravity = false;
+            gravityOn = false;
+            ErrorCodeHandler("S4489");
         }
     }
 
     private void FlipShip()
     {
-        masterControlScript.EndGame("You truly must be a spy, no loyal Valushkian would try to flip a ship!", "Your incompetence has killed you!");
+        masterControlScript.EndGame("You truly must be a spy!", "Your incompetence has killed you!");
     }
 
     private void ControlSensors(bool sensorsOn)
@@ -526,9 +539,11 @@ public class DSKY_Control_Computer : MonoBehaviour {
         {
             case (true):
                 activeScanningOn = true;
+                ErrorCodeHandler("S6632");
                 break;
             case (false):
                 activeScanningOn = false;
+                ErrorCodeHandler("S6642");
                 break;
         }
     }
@@ -543,30 +558,36 @@ public class DSKY_Control_Computer : MonoBehaviour {
             case ("O2 On"):
                 ACControl.ACOn();
                 o2On = true;
+                ErrorCodeHandler("S7756");
                 break;
             case ("O2 Off"):
                 ACControl.ACOff();
                 o2On = false;
+                ErrorCodeHandler("S7758");
                 break;
             case ("CO2 Scrub On"):
                 co2ScrubbersOn = true;
+                ErrorCodeHandler("S7778");
                 break;
             case ("CO2 Scrub Off"):
                 co2ScrubbersOn = false;
+                ErrorCodeHandler("S7779");
                 break;
         }
 
     }
 
-    private void RestraintsControl(bool restraintsOn)
+    private void RestraintsControl(bool rstrsOn)
     {
-        switch (restraintsOn)
+        switch (rstrsOn)
         {
             case (true):
                 restraintsOn = true;
+                ErrorCodeHandler("S8845");
                 break;
             case (false):
                 restraintsOn = false;
+                ErrorCodeHandler("S8848");
                 break;
         }
     }
@@ -579,7 +600,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
         }
         else
         {
-
+            ErrorCodeHandler("E8848");
         }
     }
 
@@ -592,7 +613,7 @@ public class DSKY_Control_Computer : MonoBehaviour {
     {
         if (open)
         {
-            masterControlScript.EndGame("Hopefully you were trying to flush out a traitor comrade.", "Your incompetence has killed you!");
+            masterControlScript.EndGame("Hopefully you were trying to flush out a traitor, comrade.", "Why open a hatch in space?");
         }
     }
 }

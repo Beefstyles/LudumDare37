@@ -11,18 +11,28 @@ public class MasterControllerScript : MonoBehaviour {
     public Text KillString;
     public Text VictoryText;
     public Canvas MainCanvas;
-	
-	void Start ()
+    RestartButton rb;
+    private bool gameEnded;
+
+    void Start ()
     {
         dskyControl = FindObjectOfType<DSKY_Control_Computer>();
+        rb = FindObjectOfType<RestartButton>();
         EndGameCamera.enabled = false;
         MainCanvas.enabled = false;
+        gameEnded = false;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-
+        if (gameEnded)
+        {
+            if (Input.GetButtonDown("Fire1") || Input.GetButtonDown("Fire2"))
+            {
+                rb.RestartGame();
+            }
+        }
 	}
 
     public void EndGame(string killName, string victoryText)
@@ -30,5 +40,7 @@ public class MasterControllerScript : MonoBehaviour {
         EndGameCamera.enabled = true;
         MainCanvas.enabled = true;
         KillString.text = killName;
+        VictoryText.text = victoryText;
+        gameEnded = true;
     }
 }
