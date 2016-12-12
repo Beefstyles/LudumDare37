@@ -81,6 +81,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AirConControl.cs" />
     <Compile Include="Assets\Scripts\BookController.cs" />
     <Compile Include="Assets\Scripts\BookDisplay.cs" />
     <Compile Include="Assets\Scripts\ButtonCharacteristics.cs" />

@@ -21,12 +21,18 @@ public class DSKY_Control_Computer : MonoBehaviour {
     private int firstVerbNumber = 0, secondVerbNumber = 0;
     private int firstNounNumber = 0, secondNounNumber = 0;
     GameRadioControl GRC;
+    AirConControl ACControl;
     public Rigidbody PlayerRB;
+    private bool co2ScrubbersOn;
+    private bool o2On;
+    private bool sensorDeployed;
+    private bool secretSensorCodeSet;
 
     // Use this for initialization
     void Start ()
     {
         GRC = FindObjectOfType<GameRadioControl>();
+        ACControl = FindObjectOfType<AirConControl>();
         VerbSelected = false;
         NounSelected = false;
         UpdateAllVerbNounTexts();
@@ -427,7 +433,29 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void ControlBeacon(string action)
     {
+        /*case ("22"): // Deploy
+                        ControlBeacon("Deploy");
+        break;
+                    case ("47"): // On
+                        ControlBeacon("On");
+        break;
+                    case ("68"): // Off
+                        ControlBeacon("Off");
+        break;
+                    case ("97"): // Set Code
+                        ControlBeacon("Set Code");
+        break;
+        */
 
+        switch (action)
+        {
+            case ("Deploy"):
+                if (secretSensorCodeSet)
+                {
+                    ErrorCodeHandler("S3356");
+                }
+                break;
+        }
     }
 
     private void ControlGravity(bool gravityOn)
@@ -454,6 +482,26 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void LifeSupportControl(string action)
     {
+        //private bool co2ScrubbersOn;
+        //private bool o2On;
+        //("O2 On");("O2 Off");("CO2 Scrub On");LifeSupportControl("CO2 Scrub Off");
+        switch (action)
+        {
+            case ("O2 On"):
+                ACControl.ACOn();
+                o2On = true;
+                break;
+            case ("O2 Off"):
+                ACControl.ACOff();
+                o2On = false;
+                break;
+            case ("CO2 Scrub On"):
+                co2ScrubbersOn = true;
+                break;
+            case ("CO2 Scrub Off"):
+                co2ScrubbersOn = false;
+                break;
+        }
 
     }
 

@@ -6,6 +6,12 @@ public class GameRadioControl : MonoBehaviour {
 
     private bool radioOn = false;
     public AudioSource radioMusic;
+
+    void Start()
+    {
+        radioOn = false;
+        radioMusic.mute = true;
+    }
     public void RadioOn()
     {
         if (!radioOn)
