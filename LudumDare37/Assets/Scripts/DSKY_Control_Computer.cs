@@ -22,17 +22,28 @@ public class DSKY_Control_Computer : MonoBehaviour {
     private int firstNounNumber = 0, secondNounNumber = 0;
     GameRadioControl GRC;
     AirConControl ACControl;
+    EngineSoundControl engineSoundControl;
+    MasterControllerScript masterControlScript;
     public Rigidbody PlayerRB;
-    private bool co2ScrubbersOn;
-    private bool o2On;
-    private bool sensorDeployed;
-    private bool secretSensorCodeSet;
+   
+   
+    private bool co2ScrubbersOn = false;
+    private bool o2On = false;
+    private bool sensorBeaconDeployed = false;
+    private bool secretSensorCodeSet = false;
+    private bool sensorBeaconOn = false;
+    private bool restraintsOn = false;
+    private bool gravityOn = true;
+    private bool enginesOn = false;
+    private bool activeScanningOn = false;
 
     // Use this for initialization
     void Start ()
     {
         GRC = FindObjectOfType<GameRadioControl>();
         ACControl = FindObjectOfType<AirConControl>();
+        masterControlScript = FindObjectOfType<MasterControllerScript>();
+        engineSoundControl = FindObjectOfType<EngineSoundControl>();
         VerbSelected = false;
         NounSelected = false;
         UpdateAllVerbNounTexts();
@@ -365,9 +376,11 @@ public class DSKY_Control_Computer : MonoBehaviour {
             case ("99"):
                 switch (combinedNoun)
                 {
-                    case ("44"):
+                    case ("44")://Open
+                        HatchControl(true);
                         break;
                     case ("56"):
+                        ErrorCodeHandler("E9923");
                         break;
                     default:
                         //Invalid verb
@@ -384,7 +397,19 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void ControlEngines(bool engineOn)
     {
-
+        switch (engineOn)
+        {
+            case (true):
+                engineOn = true;
+                engineSoundControl.EngineOn();
+                ErrorCodeHandler("S0067");
+                break;
+            case (false):
+                engineOn = false;
+                engineSoundControl.EngineOff();
+                ErrorCodeHandler("S0078");
+                break;
+        }
     }
 
     private void ControlLights(string action)
@@ -424,10 +449,12 @@ public class DSKY_Control_Computer : MonoBehaviour {
         if (radioOn)
         {
             GRC.RadioOn();
+            ErrorCodeHandler("S2223");
         }
         else
         {
             GRC.RadioOff();
+            ErrorCodeHandler("S2285");
         }
     }
 
@@ -450,10 +477,28 @@ public class DSKY_Control_Computer : MonoBehaviour {
         switch (action)
         {
             case ("Deploy"):
-                if (secretSensorCodeSet)
+                if (secretSensorCodeSet && sensorBeaconOn)
                 {
                     ErrorCodeHandler("S3356");
+                    sensorBeaconDeployed = true;
                 }
+                else
+                {
+                    //Failure to set beacon
+                    ErrorCodeHandler("S3359");
+                }
+                break;
+            case ("On"):
+                    ErrorCodeHandler("S3378");
+                    sensorBeaconOn = true;
+                break;
+            case ("Off"):
+                ErrorCodeHandler("S3379");
+                sensorBeaconOn = false;
+                break;
+            case ("Set Code"):
+                ErrorCodeHandler("S3389");
+                secretSensorCodeSet = true;
                 break;
         }
     }
@@ -472,12 +517,20 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void FlipShip()
     {
-
+        masterControlScript.EndGame("You truly must be a spy, no loyal Valushkian would try to flip a ship!", "Your incompetence has killed you!");
     }
 
     private void ControlSensors(bool sensorsOn)
     {
-
+        switch (sensorsOn)
+        {
+            case (true):
+                activeScanningOn = true;
+                break;
+            case (false):
+                activeScanningOn = false;
+                break;
+        }
     }
 
     private void LifeSupportControl(string action)
@@ -507,17 +560,40 @@ public class DSKY_Control_Computer : MonoBehaviour {
 
     private void RestraintsControl(bool restraintsOn)
     {
-
+        switch (restraintsOn)
+        {
+            case (true):
+                restraintsOn = true;
+                break;
+            case (false):
+                restraintsOn = false;
+                break;
+        }
     }
 
     private void DeepFreezeOn()
     {
+        if(o2On && co2ScrubbersOn && sensorBeaconDeployed && activeScanningOn && !gravityOn && restraintsOn)
+        {
+            masterControlScript.EndGame("A dropship will come pick you up in time but you slowness has been noted", "We expected you to do this quicker");
+        }
+        else
+        {
 
+        }
     }
 
     private void ErrorCodeHandler(string errorCode)
     {
         UpdatedText.StatusCode.text = errorCode;
+    }
+
+    private void HatchControl(bool open)
+    {
+        if (open)
+        {
+            masterControlScript.EndGame("Hopefully you were trying to flush out a traitor comrade.", "Your incompetence has killed you!");
+        }
     }
 }
 

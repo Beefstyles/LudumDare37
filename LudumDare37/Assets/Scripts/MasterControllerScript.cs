@@ -9,11 +9,14 @@ public class MasterControllerScript : MonoBehaviour {
     public Camera EndGameCamera;
     DSKY_Control_Computer dskyControl;
     public Text KillString;
+    public Text VictoryText;
+    public Canvas MainCanvas;
 	
 	void Start ()
     {
         dskyControl = FindObjectOfType<DSKY_Control_Computer>();
         EndGameCamera.enabled = false;
+        MainCanvas.enabled = false;
     }
 	
 	// Update is called once per frame
@@ -22,9 +25,10 @@ public class MasterControllerScript : MonoBehaviour {
 
 	}
 
-    public void EndGame(string killName)
+    public void EndGame(string killName, string victoryText)
     {
         EndGameCamera.enabled = true;
+        MainCanvas.enabled = true;
         KillString.text = killName;
     }
 }
